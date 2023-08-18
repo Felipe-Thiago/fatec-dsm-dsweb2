@@ -1,0 +1,11 @@
+var readline = require('readline-sync');
+var eleitores = Number(readline.question("Insira a quantidade de eleitores de um município: "));
+var brancos = Number(readline.question("Insira a quantidade de votos brancos: "));
+var nulos = Number(readline.question("Insira a quantidade de votos nulos: "));
+var validos = Number(eleitores - brancos - nulos);
+var brancosperc = brancos / eleitores * 100;
+var nulosperc = nulos / eleitores * 100;
+var validosperc = validos / eleitores * 100;
+console.log("Os votos válidos representam " + validosperc + "% dos votos");
+console.log("Os votos brancos representam " + brancosperc + "% dos votos");
+console.log("Os votos nulos representam " + nulosperc + "% dos votos");
