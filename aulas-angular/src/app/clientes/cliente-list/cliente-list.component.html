@@ -23,7 +23,7 @@
                     <td>{{cliente.endereco}}</td>
                     <td>{{cliente.limiteCredito | currency: 'BRL'}}</td>
                     <td>
-                        <a href="#" class="btn btn-primary" title="editar">
+                        <a class="btn btn-primary" title="editar" routerLink="/clientes/editar/{{cliente.id}}">
                             <i class="fa fa-edit"></i>
                         </a>
                     </td>
@@ -35,6 +35,6 @@
                 </tr>
             </tbody>
         </table>
-        <a href="#" class="btn btn-primary">Novo Cliente</a>
+        <a routerLink="/clientes/novo" class="btn btn-primary">Novo Cliente</a>
     </div>
 </div>
