@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Cliente } from '../shared/cliente';
 import { OnInit } from '@angular/core';
+import { ClienteService } from '../shared/cliente.service';
 
 @Component({
   selector: 'app-cliente-list',
@@ -11,16 +12,24 @@ export class ClienteListComponent implements OnInit {
   'title' = 'Relação de Clientes';
   'clientes': Cliente[];
 
-  constructor() { }
+  constructor(private clienteservice: ClienteService) { }
 
   ngOnInit() {
-    this.clientes = [
-      {id: 1, nome: 'Felipe', endereco: 'Rua abc', limiteCredito: 1200},
-      {id: 2, nome: 'Luciane', endereco: 'Rua def', limiteCredito: 800},
-      {id: 3, nome: 'Marcos', endereco: 'Rua ghi', limiteCredito: 150.80},
-      {id: 4, nome: 'Marcos Jr.', endereco: 'Rua jkl', limiteCredito: 750.30},
-      {id: 5, nome: 'Ariane', endereco: 'Rua mno', limiteCredito: 1250}
-    ];
+    this.getAll();
+  }
+
+  getAll(){
+    this.clienteservice.getAll().subscribe(resp=>{
+      this.clientes = resp;
+    });
+  }
+  
+  delete(cliente: Cliente){
+    if(window.confirm('Confirma exclusão do registro:')){
+      this.clienteservice.delete(cliente.id).subscribe(() =>{
+        this.clientes = this.clientes.filter(c => c!== cliente);
+      });
+    }
     
   }
 }
